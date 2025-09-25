@@ -3,7 +3,7 @@
 
 **Date of Submission:** September 24, 2025
 
-This project investigates the relationship between a possession-based football strategy "Tiki-Taka" and offensive success in the English Premier League. Using data from the 2020 to 2025 seasons, a simple linear regression model was built to analyze the correlation between the number of short passes a team makes and the number of goals they score. The analysis is presented in a formal report.
+This project investigates the relationship between a possession-based football strategy "Tiki-Taka" and offensive success in the English Premier League. Using data from the 2020 to 2025 seasons, a simple linear regression model was built to analyze the correlation between the number of short passes a team makes and the number of goals they score. The analysis is presented in a formal [`report`](paper/paper.pdf).
 
 ## Repository Structure
 The repository is organized as follows:
