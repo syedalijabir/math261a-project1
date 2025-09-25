@@ -1,7 +1,7 @@
 # Is Tiki-Taka Still Relevant in 2025?
 **Author:** Ali Jabir
 
-**Date of Submission:** [September 24, 2025]
+**Date of Submission:** September 24, 2025
 
 This project investigates the relationship between a possession-based football strategy "Tiki-Taka" and offensive success in the English Premier League. Using data from the 2020 to 2025 seasons, a simple linear regression model was built to analyze the correlation between the number of short passes a team makes and the number of goals they score. The analysis is presented in a formal report.
 
@@ -24,8 +24,6 @@ math261a-project1/
     └── references.bib     # Bibliography file
 ```
 
-**Example statement:** Data used in this project is obtained from [San Francisco Open Data](https://data.sfgov.org) who provide the data under the [Open Data Commons Public Domain Dedication and License](https://opendatacommons.org/licenses/pddl/1-0/).
-
 ## External Resources
 
 Large Language Models (LLMs), specifically OpenAI's ChatGPT, were used as an assistant during this project. Their use was limited to the following tasks:
@@ -41,5 +39,5 @@ The data used in this project was sourced from [FBref.com](fbref.com), which is 
 
 **Use in this Project:** This project uses the data strictly for academic and educational purposes as part of a student project. No commercial use is intended or implied. All data is attributed to its source.
 
-# Acknowledgments
+## Acknowledgments
 This project repository is based on the template provided by [Rohan Alexander](https://github.com/RohanAlexander/starter_folder/tree/main).
