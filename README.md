@@ -32,7 +32,7 @@ Large Language Models (LLMs), specifically OpenAI's ChatGPT, were used as an ass
 
 - BibTeX Formatting: Helping to resolve formatting issues with the bibliography file.
 
-# Dataset
+## Dataset
 The data used in this project was sourced from [FBref.com](fbref.com), which is powered by Sports Reference LLC.
 
 **License:** The data is presented on FBref for personal, non-commercial use only. According to Sports Reference's terms of use, automated scraping or reuse of the data for commercial purposes is prohibited.
