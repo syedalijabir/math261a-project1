@@ -14,11 +14,14 @@ bibliography: references.bib
 
 # Introduction
 
-In modern football, tactical strategies vary widely, but one of the most influential over the past two decades has been possession-based play. The most iconic example is the Tiki-Taka style, popularized by Spanish clubs and the national team. This strategy maintains possession through short and precise passes which allows them to control the game and create scoring opportunities through patient build-up. This report explores whether the short, possession-heavy passes of the Tiki-Taka style are actually connected to how many goals a team scores. The findings will also shed light on whether Tiki-Taka remains an effective strategy in modern football or if teams should look toward alternative approaches.
+In modern football, tactical strategies vary widely, but one of the most influential over the past two decades has been possession-based play. The most iconic example is the Tiki-Taka style. Tiki-Taka (sometimes written tiqui-taca) is a style of play in football (soccer) characterized by short, quick passes, constant player movement, and possession dominance to gradually create scoring opportunities rather than relying on long balls or direct attacks. It emphasizes technical precision, spatial awareness, and team cohesion, with players often maintaining continuous passing triangles to retain possession and break down defenses. The style was perfected and globally recognized under Pep Guardiola’s FC Barcelona (2008–2012), whose midfield trio of Xavi Hernández, Andrés Iniesta, and Sergio Busquets who exemplified the tactic through their relentless passing [@wilson2013].
+
+
+This report explores whether the short, possession-heavy passes of the Tiki-Taka style are actually connected to how many goals a team scores. The findings will also shed light on whether Tiki-Taka remains an effective strategy in modern football or if teams should look toward alternative approaches.
 
 We use data from matches played over the last five seasons of the English Premier League (EPL), covering 2020 to 2025. By aggregating team-level passing data, we can test whether teams that make more short passes also tend to score more. To do this, we apply linear regression to model the relationship between the total number of completed short passes by a team and the total number of goals they scored. The findings provide insight into the practical effectiveness of the Tiki-Taka style in modern football.
 
-Our analysis indicates that a positive relationship exists between short-passing volume and goal output, with an estimated 0.0062 goals per one short pass completed (approx. 1 goal per 161 short passes). This suggests that the principles of Tiki-Taka retain statistical relevance. However, diagnostic checks revealed violations of key regression assumptions, so we should be cautious in interpreting these results. The core relationship appears meaningful, but its precise nature is complex and influenced by factors not captured by this simple model.
+Our analysis indicates that a positive relationship exists between short-passing volume and goal output, with an estimated 0.0062 goals per one short pass completed (approx. 1 goal per 161 short passes). This suggests that the principles of Tiki-Taka retains some relevance. However, diagnostic checks revealed violations of key regression assumptions, so we should be cautious in interpreting these results. The core relationship appears meaningful, but its precise nature is complex and influenced by factors not captured by this simple model.
 
 The paper is structured as follows. The data section describes the dataset and its limitations. The methods section explains the simple linear regression framework used to analyze the relationship of interest. The results section presents the regression findings and diagnostic checks of model assumptions. Finally, the discussion section interprets the practical implications.
 
@@ -26,7 +29,7 @@ The paper is structured as follows. The data section describes the dataset and i
 
 The data for this analysis comes from Sports Reference [@sportsref2025], specifically the English Premier League (EPL) team statistics for the 2020–2025 seasons. According to the Sports Reference data use policy, automated scraping or reuse for commercial purposes is not permitted; this work is strictly a non-commercial student project conducted for academic purposes only.
 
-The EPL was chosen because it is the most watched and widely followed football league in the world, making it a strong representative dataset for this investigation. The standard team stats [@sportsrefStandard] data set contains per-season summaries of team performance, including playing time, goals, assists, cards, and progression statistics. For this project, we focus only on the total goals scored per team per season as the measure of offensive output. The passing stats [@sportsrefPassing] provides team-level passing breakdowns. This includes the number of short, medium, and long passes attempted. Since the Tiki-Taka playing style is based on quick, short passes we extract the number of short passes as the predictor of interest.
+The EPL was chosen because it is the most watched and widely followed football league in the world, making it a strong representative dataset for this investigation. The standard team stats [@sportsrefStandard] data set contains per-season summaries of team performance, including playing time, goals, assists, cards, and progression statistics. For this project, we focus only on the total goals scored per team per season as the measure of offensive output. The passing stats [@sportsrefPassing] provides team-level passing breakdowns. This includes the number of short, medium, and long passes attempted. Since the Tiki-Taka playing style is based on quick, short passes we extract the number of short passes as the predictor of interest. A short pass is generally defined as being between 4.5 to 14 meters. Here we are assuming that all the short passes are part of the Tiki-Taka strategy, but this is not necessarily true as some of these short passes might have been made while defending or in a non-progessive manner.
 
 ```{r}
 #| include: false
@@ -90,7 +93,7 @@ ggplot(data, aes(x = Goals)) +
   theme_minimal(base_size = 12)
 ```
 
-@fig-passes-hist shows the distribution successful short passes. We notice that it is somewhat skewed, indicating after a certain point increase in short passes does not account for more goals.
+@fig-passes-hist shows the distribution completed short passes. We notice that it is somewhat skewed, indicating after a certain point increase in short passes does not account for more goals.
 
 ```{r}
 #| echo: false
@@ -112,7 +115,7 @@ There are several limitations of this dataset that should be noted. Other team a
 # Methods {#sec:methods}
 
 We adopt a simple linear regression framework to investigate the relationship between short passes and team goal-scoring. Simple linear regression is a statistical method used to model the relationship between a single predictor variable and a response variable. The model assumes that the expected value of the response is linear to the predictor. The model assumes the errors are independent of each other, normally distributed with mean zero and a constant variance. It is given by the equation
-$$Y_i = \beta_0 + \beta_1X_i + \epsilon_i, \text{where}i=1,...,n$$
+$$Y_i = \beta_0 + \beta_1X_i + \epsilon_i, \text{where }i=1,...,n$$
 
 In this case study
 
@@ -122,9 +125,9 @@ In this case study
 -   $\beta_1$ is the slope coefficient representing the expected change in goals per short pass completed.
 -   $\epsilon_i$ is the error term which captures the unobserved factors affecting the goal scoring. We assume that the error terms are independent and identically distributed with mean zero and a constant variance i.e. $\epsilon_i \backsim N(0, \sigma^2)$
 
-Model parameters $(\beta_0,\beta_1)$ were estimated using ordinary least squares (OLS) via the `lm()` function in the R programming language `(version 2025.09.0+387)`@R-base. All the visualizations were conducted in R using the `dplyr` and `ggplot2` packages.
+Model parameters $(\beta_0,\beta_1)$ were estimated using ordinary least squares (OLS) via the `lm()` function in the R programming language [@R-base] `version 2025.09.0+387`. All the visualizations were conducted in R using the `dplyr` and `ggplot2` packages.
 
-We would like to point out that simple linear regression assumes linearity between the short passes and the number of goals scored. In reality the effect of passing volume on goals may not be strictly linear. We assume that all the short passes are part of the Tiki-Taka strategy, but this is not necessarily true as some of these short passes might have been made while defending or in a non-progessive manner. Model also assumes data to be independent but it could be possible that a teams performance between two seasons is correlated because of team's internal battles or politics. The regression may show correlation but not causation. High short passes count may correlate with number of goals but passing itself may not necessarily be the causal driver.
+We would like to point out that simple linear regression assumes linearity between the short passes and the number of goals scored. In reality the effect of passing volume on goals may not be strictly linear. Model also assumes data to be independent but it could be possible that a teams performance between two seasons is correlated because of team's internal battles or politics. The regression may show correlation but not causation. High short passes count may correlate with number of goals but passing itself may not necessarily be the causal driver.
 
 # Results {#sec:results}
 We fitted a simple linear regression model and our estimates for $\beta_0$ and $\beta_1$ came out to be `9.2` and `0.0062` respectively. Giving us the regression equation:
@@ -142,7 +145,7 @@ $$Goals = 9.20 + 0.0062\times Short\_Passes$$
 
 ggplot(data, aes(x = Short_Passes, y = Goals)) +
   geom_point(color = "blue", size = 2) +  # scatter points
-  geom_smooth(method = "lm", se = TRUE, color = "red", size=1) +
+  geom_smooth(method = "lm", se = FALSE, color = "red", size=1) +
   labs(
     #title = "Relationship between Passing and Goals by Team",
     x = "Number of successful short passes",
@@ -151,7 +154,7 @@ ggplot(data, aes(x = Short_Passes, y = Goals)) +
   theme_minimal(base_size = 12)
 ```
 
-Next, we assess whether the model provides a good fit by examining its underlying assumptions. The linearity of the relationship between goals and number of passes made in general is there due to the nature of the game. We assumed that the errors are normally distributed with mean zero and constant variance. @fig-error-dist illustrates the distribution of the residuals, which appears approximately normal and centered around zero with a little bit skewness to the right.
+Next, we assess whether the model provides a good fit by examining its underlying assumptions. The linearity of the relationship between goals and number of passes made in general is there due to the nature of the game i.e. it will always take some number of passes before a team could score a goal. We assumed that the errors are normally distributed with mean zero and constant variance. @fig-error-dist illustrates the distribution of the residuals, which appears approximately normal and centered around zero with a little bit skewness to the right.
 
 ```{r}
 #| echo: false
@@ -213,8 +216,8 @@ segments(x0 = model$fitted, y0 = 0,
 # Discussion {#sec:discussion}
 This study set out to answer the question: is the Tiki-Taka style still a relevant and effective strategy for scoring goals in 2025? Our analysis of five seasons of English Premier League data shows that while there is a positive relation between the variables, we should read into the results carefully.
 
-The regression model revealed a statistically significant positive relationship between short passes and goals scored. The estimated coefficient suggests that, on average, a team can expect to score one additional goal for every `161` short passes completed. This finding indicates that the fundamental premise of Tiki-Taka still holds some validity in the contemporary game. However, this correlation should not be misinterpreted as causation or a blanket endorsement of the style. The model explains only about half of the variation of the predictor `(R² = 0.49)` and on average the model's predicted number of goals is off by `12.3` (residual standard error) per team.
+The regression model revealed a positive correlation between short passes and the number of goals scored. The estimated coefficient suggests that, on average, a team can expect to score one additional goal for every `161` short passes completed. This finding indicates that the fundamental premise of Tiki-Taka still holds some validity in the contemporary game. However, this correlation should not be misinterpreted as causation or a blanket endorsement of the style. The model explains only about half of the variation of the predictor `(R² = 0.49)`.
 
-The diagnostic checks revealed that the assumptions of the linear regression model were not fully satisfied. The violation of the constant variance (homoscedasticity) assumption and the slight skew in the residuals indicate that the relationship is not as clean or predictable as the model implies. Therefore, to directly address the question of whether a team should invest in Tiki-Taka, our results are inconclusive. Future research could build on this study by incorporating multiple predictor variables (e.g., possession percentage, only considering short passes in the opponent's half, shooting statistics.) into a multiple regression model. This would provide a more holistic view of attacking effectiveness and help isolate the specific impact of short passes.
+The diagnostic checks revealed that the assumptions of the linear regression model were not fully satisfied. The violation of the constant variance (homoscedasticity) assumption and the skew in the residuals indicate that the relationship is not as clean or predictable as the model implies. Therefore, to directly address the question of whether a team should invest in Tiki-Taka, our results are inconclusive. Future research could build on this study by incorporating multiple predictor variables (e.g., possession percentage, only considering short passes in the opponent's half, shooting statistics.) into a multiple regression model. This would provide a more holistic view of attacking effectiveness and help isolate the specific impact of short passes.
 
 # References
